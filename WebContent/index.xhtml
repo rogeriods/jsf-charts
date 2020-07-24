@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Grupo Indemetal | Infograph</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</h:head>
+<body>
+	<nav class="shadow navbar navbar-expand-lg navbar-dark bg-danger">
+		<div class="navbar-brand">
+			<img alt="Grupo Indemetal - Infograph" src="images/logo_135x37-white.png" />
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" 
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+			aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	    	<li class="nav-item active">
+	        <h:link value="Dashboard" outcome="index.xhtml" styleClass="nav-link" />
+	      </li>	 
+	      <li class="nav-item">
+	        <h:link value="Faturamento Mensal" outcome="revenues.xhtml" styleClass="nav-link" />
+	      </li>	      
+	    </ul>
+  	</div>
+	</nav>
+
+	<div class="container">
+		<div class="pricing-header px-3 py-3 pb-md-4 mx-auto">
+	    <h1 class="display-4">Infographic Dashboard</h1>
+	    <p class="lead">
+	        Bem-vindo ao sistema de gráficos informativos do Grupo Indemetal. <br />
+	        <code>Utilize o menu acima para visualizar os gráficos.</code>
+	    </p>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

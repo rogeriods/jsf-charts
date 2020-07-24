@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Grupo Indemetal | Infograph</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/custom.css" />
+</h:head>
+<body>
+	<nav class="shadow navbar navbar-expand-lg navbar-dark bg-danger">
+		<div class="navbar-brand">
+			<img alt="Grupo Indemetal - Infograph" src="images/logo_135x37-white.png" />
+		</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" 
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+			aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	     	<li class="nav-item">
+	        <h:link value="Dashboard" outcome="index.xhtml" styleClass="nav-link" />
+	      </li>	 
+	      <li class="nav-item active">
+	        <h:link value="Faturamento Mensal" outcome="revenues.xhtml" styleClass="nav-link" />
+	      </li>	     
+	    </ul>
+  	</div>
+	</nav>
+
+	<div class="container">
+		<div class="pricing-header px-3 py-3 pb-md-4 mx-auto">
+			<h1 class="display-4">Faturamento (Mensal)</h1>
+			<div class="card">
+				<div class="card-body">
+					<p>Todos campos é obrigatório o preenchimento</p>
+					<h:form id="revenuesForm" class="form-row">
+						<div class="col-md-12">
+							<h:messages styleClass="text-danger" />
+						</div>
+						<div class="form-group col-md-2">
+							<h:inputText id="year" value="#{revenueFaces.year}" required="true" 
+								label="Ano base" styleClass="form-control form-control-sm" maxlength="4" />
+						</div>
+						<div class="form-group col-md-3">
+							<h:selectOneMenu id="company" value="#{revenueFaces.company}" 
+								label="Empresa" styleClass="form-control form-control-sm" required="true">
+								<f:selectItem itemValue="1" itemLabel="Etiquetas" />
+								<f:selectItem itemValue="2" itemLabel="Gráficos" />
+							</h:selectOneMenu>
+						</div>
+						<div class="form-group col-md-3">
+							<h:commandButton value="Carregar gráfico..." action="#{revenueFaces.fillGraph}" 
+								styleClass="btn btn-sm btn-outline-danger" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+    	
+    	<!-- Chart in canvas -->
+    	<canvas id="myChart"></canvas>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script>
+	var graphData = '#{revenueFaces.graphData}';
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+    data: {
+    	labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    	datasets: [{
+    		label: '# total',
+    		data: JSON.parse(graphData),
+    		backgroundColor: [
+    			'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)',
+    			'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)',
+    			'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)',
+    			'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)',
+    		],
+    		borderColor: [
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)',
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)',
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)',
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)'
+    		],
+    		borderWidth: 2,
+    		lineTension: 0,
+    		pointRadius: 3,
+    		pointHoverRadius: 15,
+    		pointBackgroundColor: [
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)',
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)',
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)',
+    			'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 1)'
+    		]
+    	}]
+		},
+    options: {
+    	tooltips: {
+    		callbacks: {
+    			label: function(t, d) {
+    				var xLabel = d.datasets[t.datasetIndex].label;
+    				var yLabel = t.yLabel >= 1000 ? 
+    						t.yLabel.toLocaleString("pt-BR",{style:"currency", currency:"BRL"}) : t.yLabel;
+    						return xLabel + ': ' + yLabel;
+    			}
+				}
+			},
+    	scales: {
+    		yAxes: [{
+    			ticks: {
+    				beginAtZero: true,
+    				callback: function(value, index, values) {
+    					return value.toLocaleString("pt-BR",{style:"currency", currency:"BRL"});
+    				}
+    			}
+    		}]
+			}
+		}
+	});
+</script>
+</body>
+</html>
