@@ -1,7 +1,14 @@
 # GI-INFOGRAPH
 
-This is a simple JSF app using Chart.js connected to a Oracle 11g to show Inforgraphs at Indemetal, 
+This is a simple JSF app using Chart.js connected to a Oracle 11g to show Inforgraphs at Indemetal,
 company that I'm working currently.
+
+## Screenshots
+
+Main screen
+I hide some information, because I'm using this project in a company that I work now.
+
+![Alt text](resources/screen01.png)
 
 ## Getting Started
 
