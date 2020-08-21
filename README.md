@@ -8,7 +8,7 @@ company that I'm working currently.
 Main screen
 I hide some information, because I'm using this project in a company that I work now.
 
-![Alt text](resources/screen01.png)
+![Alt text](resources/screen01.PNG)
 
 ## Getting Started
 
